@@ -1,1 +1,1 @@
-# tuni-devops
+This repo is for course exercises.
