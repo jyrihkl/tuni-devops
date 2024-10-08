@@ -1,0 +1,14 @@
+o The used LLM tool
+The tool I used was the latest free version of ChatGPT (GPT‑4o)
+
+o Motivation/reason to use LLM
+To aid in writing code for the services used for the task. They felt like secondary objectives as opposed to the primary goal of learning Docker and its configuration (for which ChatGPT was *not* used).
+
+o How and why LLM helped
+It generated (nearly) functioning code for the two simple applications based on my description of the task and the Dockerfiles.
+
+o What kind of mistakes LLM did
+It mistakenly used -I flag as an argument to hostname in service2 which is not supported by the BusyBox suite used by Alpine Linux (which is what service2 uses). I manually switched this to -i instead.
+
+o What were things that LLM was not able to provide
+Apart from the mishap above, it provided exactly what was expected: simple code for the services.
