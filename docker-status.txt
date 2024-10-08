@@ -1,1 +1,10 @@
-NYI
+CONTAINER ID   IMAGE          COMMAND                CREATED              STATUS              PORTS                                       NAMES
+bd5991d0a60c   ex1/service1   "python service1.py"   About a minute ago   Up About a minute   0.0.0.0:8199->8199/tcp, :::8199->8199/tcp   tuni-devops-service1-1
+8a47b1d4b432   ex1/service2   "./service2"           About a minute ago   Up About a minute   5001/tcp                                    tuni-devops-service2-1
+
+
+NETWORK ID     NAME                  DRIVER    SCOPE
+3aada7d50a54   bridge                bridge    local
+de8fde4a8b14   host                  host      local
+019467e142a9   none                  null      local
+2a201b0acb35   tuni-devops_default   bridge    local
