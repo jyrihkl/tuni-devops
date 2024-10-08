@@ -1,1 +1,11 @@
-NYI
+Kernel:
+Containers use the hosts kernel to operate.
+
+Hardware/computing resources:
+Obviously since containers run on the same system as the host OS, they have to share physical resources.
+
+Network:
+Containers can be configured to share the hosts network connection. By default, they are isolated.
+
+Files:
+Files can be shared between the host and containers through a mechanism called volumes. This exposes a portion of the hosts file system to the containers.
