@@ -1,5 +1,9 @@
 FROM python:3.9-slim
 
+LABEL maintainer="jyrihkl" \
+        version="1.0" \
+        description="Service 1 using python"
+
 RUN apt-get update && apt-get install -y procps
 
 WORKDIR /app

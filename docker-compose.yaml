@@ -1,5 +1,6 @@
 services:
   service1:
+    image: ex1/service1
     build: ./service1
     ports:
       - "8199:8199"
@@ -7,5 +8,6 @@ services:
       - service2
 
   service2:
+    image: ex1/service2
     build: ./service2
 

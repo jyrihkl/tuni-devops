@@ -1,5 +1,9 @@
 FROM golang:1.17-alpine
 
+LABEL maintainer="jyrihkl" \
+        version="1.0" \
+        description="Service 2 using golang"
+
 RUN apk add --no-cache procps
 
 WORKDIR /app
