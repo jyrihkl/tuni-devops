@@ -1,8 +1,8 @@
 services:
   service1:
     build: ./service1
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 3
     networks:
       - loadbalancing
     depends_on:
