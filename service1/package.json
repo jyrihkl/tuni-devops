@@ -7,8 +7,9 @@
       "start": "node service1.js"
     },
     "dependencies": {
-      "axios": "^0.21.1",
-      "express": "^4.17.1"
+      "axios": "^1.7.7",
+      "express": "^4.21.1",
+      "cors": "^2.8.5"
     }
   }
   
