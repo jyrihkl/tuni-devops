@@ -2,12 +2,9 @@ services:
   service1:
     build: ./service1
     # deploy:
-    #   mode: replicated
     #   replicas: 3
     networks:
       - loadbalancing
-    ports:
-      - "8199:8199"
     depends_on:
       - service2
 
