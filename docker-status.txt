@@ -1,10 +1,17 @@
-CONTAINER ID   IMAGE          COMMAND                CREATED              STATUS              PORTS                                       NAMES
-bd5991d0a60c   ex1/service1   "python service1.py"   About a minute ago   Up About a minute   0.0.0.0:8199->8199/tcp, :::8199->8199/tcp   tuni-devops-service1-1
-8a47b1d4b432   ex1/service2   "./service2"           About a minute ago   Up About a minute   5001/tcp                                    tuni-devops-service2-1
-
+CONTAINER ID   IMAGE            COMMAND                  CREATED              STATUS              PORTS
+                    NAMES
+6a4380ff0797   testi-nginx      "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8198->80/tcp, [::]:8198->80/tcp   testi-nginx-1
+a4ff22e0db73   testi-service1   "docker-entrypoint.s…"   About a minute ago   Up About a minute   8199/tcp
+                    testi-service1-2
+b2252a77e42c   testi-service1   "docker-entrypoint.s…"   About a minute ago   Up About a minute   8199/tcp
+                    testi-service1-1
+fc4aae23cf11   testi-service1   "docker-entrypoint.s…"   About a minute ago   Up About a minute   8199/tcp
+                    testi-service1-3
+557cc8c397ed   testi-service2   "./service2"             About a minute ago   Up About a minute   5001/tcp
+                    testi-service2-1
 
 NETWORK ID     NAME                  DRIVER    SCOPE
-3aada7d50a54   bridge                bridge    local
-de8fde4a8b14   host                  host      local
-019467e142a9   none                  null      local
-2a201b0acb35   tuni-devops_default   bridge    local
+b4963ddcfe15   bridge                bridge    local
+e9acf7352854   host                  host      local
+5f3aa2b5d8ee   none                  null      local
+19e9972c1a06   testi_loadbalancing   bridge    local
