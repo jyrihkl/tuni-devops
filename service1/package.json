@@ -1,0 +1,14 @@
+{
+    "name": "service1",
+    "version": "1.0.0",
+    "description": "Service1 implementation using Node.js and Express.js",
+    "main": "service1.js",
+    "scripts": {
+      "start": "node service1.js"
+    },
+    "dependencies": {
+      "axios": "^0.21.1",
+      "express": "^4.17.1"
+    }
+  }
+  

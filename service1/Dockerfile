@@ -1,18 +1,17 @@
-FROM python:3.9-slim
+FROM node:23
 
 LABEL maintainer="jyrihkl" \
-        version="1.0" \
-        description="Service 1 using python"
-
-RUN apt-get update && apt-get install -y procps
+        version="1.1" \
+        description="Service 1 using nodejs"
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY package*.json ./
+RUN npm install
 
-COPY service1.py .
+COPY . .
 
 EXPOSE 8199
 
-CMD ["python", "service1.py"]
+CMD ["node", "service1.js"]
+

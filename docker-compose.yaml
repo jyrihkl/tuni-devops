@@ -1,13 +1,31 @@
 services:
   service1:
-    image: ex1/service1
     build: ./service1
+    # deploy:
+    #   mode: replicated
+    #   replicas: 3
+    networks:
+      - loadbalancing
     ports:
       - "8199:8199"
     depends_on:
       - service2
 
   service2:
-    image: ex1/service2
     build: ./service2
+    networks:
+      - loadbalancing
 
+  nginx:
+    build: ./nginx
+    ports:
+      - "8198:80"
+    networks:
+      - loadbalancing
+    depends_on:
+      - service1
+      - service2
+
+networks:
+  loadbalancing:
+    driver: bridge
