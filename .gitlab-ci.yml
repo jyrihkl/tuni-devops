@@ -31,4 +31,4 @@ deploy-job:
   stage: deploy
   script:
     - echo "Deploying services"
-    # - docker compose up -d
+    - docker compose up -d
