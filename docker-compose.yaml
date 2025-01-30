@@ -23,6 +23,16 @@ services:
       - service1
       - service2
 
+  state-manager:
+    build: ./state-manager
+    ports:
+      - "8197:8197"
+    networks:
+      - loadbalancing
+    depends_on:
+      - service1
+      - service2
+
 networks:
   loadbalancing:
     driver: bridge
