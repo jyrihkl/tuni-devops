@@ -7,6 +7,8 @@ const PORT = 8197;
 
 app.use(bodyParser.json());
 
+let state = "INIT";
+
 // Middleware to check credentials against Nginx
 async function checkAuth(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -51,7 +53,7 @@ app.put("/state", checkAuth, express.text(), (req, res) => {
 
 // GET /state
 app.get("/state", (req, res) => {
-    res.sendStatus(404);
+    res.status(200).send(state);
 });
 
 // GET /run-log
