@@ -7,10 +7,15 @@ const PORT = 8197;
 
 app.use(bodyParser.json());
 
-let state = "INIT";
+const states = {init: "INIT", paused: "PAUSED", running: "RUNNING", shutdown: "SHUTDOWN"};
+let state = states.init;
 
 // Middleware to check credentials against Nginx
 async function checkAuth(req, res, next) {
+    if (req.method == 'GET') {
+        next();
+    }
+
     const authHeader = req.headers['authorization'];
 
     // console.log('Received request:', req.method, req.url);
@@ -46,14 +51,22 @@ async function checkAuth(req, res, next) {
 
 // PUT /state
 app.put("/state", checkAuth, express.text(), (req, res) => {
-    const newState = req.body;
-    console.log("New state:", newState);
-    res.sendStatus(404);
+    const newState = req.body.trim().toUpperCase();
+
+    if (newState === states.init || newState === states.paused || newState === states.running || newState === states.shutdown) {
+        state = newState;
+        res.status(200).send("State updated");
+        return;
+    }
+
+    res.status(400).send("Invalid state");
 });
 
 // GET /state
 app.get("/state", (req, res) => {
-    res.status(200).send(state);
+    res.status(200)
+        .set('Content-Type', 'text/plain')
+        .send(state);
 });
 
 // GET /run-log
