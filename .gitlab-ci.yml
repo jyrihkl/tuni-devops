@@ -24,7 +24,7 @@ test-job:
   extends: .on_project_branch
   stage: test
   script:
-    - docker compose up -d # might be unnecessary, cba testing
+    - docker compose build tests
     - docker compose run --rm tests npm test
   after_script:
     - docker compose down
