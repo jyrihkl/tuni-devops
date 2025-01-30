@@ -96,20 +96,26 @@ app.get("/run-log", (req, res) => {
 });
 
 // helper function for getting system info
-const getSystemInfo = async (authHeader) => {
-    const response = await axios.get('http://nginx:80/sys', {
-        headers: { 'Authorization': authHeader }
-    });
-    return JSON.stringify(response.data);
-};
+// const getSystemInfo = async (authHeader) => {
+//     const response = await axios.get('http://nginx:80/sys', {
+//         headers: { 'Authorization': authHeader }
+//     });
+//     return JSON.stringify(response.data);
+// };
 
 // GET /request
-app.get("/request", checkAuth, async (req, res) => {
-    const systemInfo = await getSystemInfo(req.headers['authorization']);
+app.get("/request", (req, res) => {
+    // This is a dummy endpoint that does nothing
     res.status(200)
         .set('Content-Type', 'text/plain')
-        .send(systemInfo);
+        .send("Request received");
 });
+// app.get("/request", checkAuth, async (req, res) => {
+//     const systemInfo = await getSystemInfo(req.headers['authorization']);
+//     res.status(200)
+//         .set('Content-Type', 'text/plain')
+//         .send(systemInfo);
+// });
 
 app.listen(PORT, () => console.log(`State Manager running on port ${PORT}`));
 
