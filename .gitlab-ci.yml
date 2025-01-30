@@ -13,9 +13,6 @@ stages:
 build-job:
   extends: .on_project_branch
   stage: build
-  image: docker:latest
-  services:
-    - docker:dind
   script:
     - docker compose build
   artifacts:
@@ -26,9 +23,6 @@ build-job:
 test-job:
   extends: .on_project_branch
   stage: test
-  image: docker:latest
-  services:
-    - docker:dind
   script:
     - docker compose up -d
     # - docker-compose run tests
@@ -41,7 +35,5 @@ test-job:
 deploy-job:
   extends: .on_project_branch
   stage: deploy
-  services:
-    - docker:dind
   script:
     - docker compose up -d
