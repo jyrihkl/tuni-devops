@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 const app = express();
 const axios = require('axios');
+const { get } = require("http");
 const PORT = 8197;
 
 app.use(bodyParser.json());
@@ -94,9 +95,20 @@ app.get("/run-log", (req, res) => {
     });
 });
 
+// helper function for getting system info
+const getSystemInfo = async (authHeader) => {
+    const response = await axios.get('http://nginx:80/sys', {
+        headers: { 'Authorization': authHeader }
+    });
+    return JSON.stringify(response.data);
+};
+
 // GET /request
-app.get("/request", (req, res) => {
-    res.sendStatus(404);
+app.get("/request", checkAuth, async (req, res) => {
+    const systemInfo = await getSystemInfo(req.headers['authorization']);
+    res.status(200)
+        .set('Content-Type', 'text/plain')
+        .send(systemInfo);
 });
 
 app.listen(PORT, () => console.log(`State Manager running on port ${PORT}`));
