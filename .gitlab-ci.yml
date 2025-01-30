@@ -13,22 +13,35 @@ stages:
 build-job:
   extends: .on_project_branch
   stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - echo "Building services"
     - docker compose build
+  artifacts:
+    paths:
+      - docker-compose.yaml
 
 # Run tests
 test-job:
   extends: .on_project_branch
   stage: test
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - echo "Running tests"
-    #- docker compose run --rm service1 npm test
+    - docker compose up -d
+    # - docker-compose run tests
+  after_script:
+    - docker compose down
+  dependencies:
+    - build
 
 # Deploy
 deploy-job:
   extends: .on_project_branch
   stage: deploy
+  services:
+    - docker:dind
   script:
-    - echo "Deploying services"
     - docker compose up -d
