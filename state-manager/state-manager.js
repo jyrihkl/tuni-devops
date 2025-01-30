@@ -10,6 +10,8 @@ app.use(bodyParser.json());
 const states = {init: "INIT", paused: "PAUSED", running: "RUNNING", shutdown: "SHUTDOWN"};
 let state = states.init;
 
+const logFile = "run-log.txt";
+
 // Middleware to check credentials against Nginx
 async function checkAuth(req, res, next) {
     if (req.method == 'GET') {
@@ -54,8 +56,17 @@ app.put("/state", checkAuth, express.text(), (req, res) => {
     const newState = req.body.trim().toUpperCase();
 
     if (newState === states.init || newState === states.paused || newState === states.running || newState === states.shutdown) {
-        state = newState;
-        res.status(200).send("State updated");
+        if (newState !== state) {
+            const logEntry = `${new Date().toISOString()}: ${state}->${newState}\n`;
+            fs.appendFile(logFile, logEntry, (err) => {
+                if (err) {
+                    res.status(500).send("Error writing to log file");
+                    return;
+                }
+            });
+            state = newState;
+        }
+        res.sendStatus(200);
         return;
     }
 
@@ -71,7 +82,16 @@ app.get("/state", (req, res) => {
 
 // GET /run-log
 app.get("/run-log", (req, res) => {
-    res.sendStatus(404);
+    fs.readFile(logFile, 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send("Error reading log file");
+            return;
+        }
+
+        res.status(200)
+            .set('Content-Type', 'text/plain')
+            .send(data);
+    });
 });
 
 // GET /request
