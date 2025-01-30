@@ -43,22 +43,24 @@ async function checkAuth(req, res, next) {
 
 
 // PUT /state
-app.put("/state", checkAuth, (req, res) => {
+app.put("/state", checkAuth, express.text(), (req, res) => {
+    const newState = req.body;
+    console.log("New state:", newState);
     res.sendStatus(404);
 });
 
 // GET /state
-app.get("/state", checkAuth, (req, res) => {
+app.get("/state", (req, res) => {
     res.sendStatus(404);
 });
 
 // GET /run-log
-app.get("/run-log", checkAuth, (req, res) => {
+app.get("/run-log", (req, res) => {
     res.sendStatus(404);
 });
 
 // GET /request
-app.get("/request", checkAuth, (req, res) => {
+app.get("/request", (req, res) => {
     res.sendStatus(404);
 });
 

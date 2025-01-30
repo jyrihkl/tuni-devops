@@ -20,8 +20,7 @@ services:
     networks:
       - loadbalancing
     depends_on:
-      - service1
-      - service2
+      - state-manager
 
   state-manager:
     build: ./state-manager
@@ -31,7 +30,15 @@ services:
       - loadbalancing
     depends_on:
       - service1
-      - service2
+
+  tests:
+    build: ./tests
+    networks:
+      - loadbalancing
+    depends_on:
+      - state-manager
+    profiles:
+      - test
 
 networks:
   loadbalancing:
