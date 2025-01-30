@@ -25,6 +25,7 @@ test-job:
   stage: test
   script:
     - docker compose build tests
+    - docker compose up -d
     - docker compose run --rm tests npm test
   after_script:
     - docker compose down
